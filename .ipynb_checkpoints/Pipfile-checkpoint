@@ -4,11 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-jupyter = "*"
-lab = "*"
-pandas = "*"
-numpy = "*"
-glob2 = "*"
+jupyterlab = "*"
+sconstool-nbconvert = "*"
+jupyter-contrib-nbextensions = "*"
 
 [dev-packages]
 
