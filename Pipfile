@@ -25,6 +25,8 @@ statannot="0.2.3"
 statsmodels="0.13.1"
 stmol="0.0.7"
 tqdm="4.59.0"
+altair="*"
+altair_viewer = "*"
 
 
 [dev-packages]

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "97489002130b4f690c9fe720377c0e9ddae145766d23850d6892326cf34458fa"
+            "sha256": "324426038ac4e06d677238385d9b4ff8c847a57ba9044e5db5515e44daa139b9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -21,8 +21,24 @@
                 "sha256:39399a267c49b30d102c10411e67ab26374156a84b1aeb9fcd15140429ba49c5",
                 "sha256:8b45ebeaf8557f2d760c5c77b79f02ae12aee7c46c27c06014febab6f849bc87"
             ],
-            "markers": "python_version >= '3.7'",
+            "index": "pypi",
             "version": "==4.2.2"
+        },
+        "altair-data-server": {
+            "hashes": [
+                "sha256:b39205a48ab2678020fc58739cb973845879ed169cb5addddc9dcbf5a69aeb2b",
+                "sha256:bd1414d69dbfec22c804b34210491d7313e5edc7736504dfb8c405ded0e2015b"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==0.4.1"
+        },
+        "altair-viewer": {
+            "hashes": [
+                "sha256:5da49c52ad9fc56b823cc479b8e5332324d1544b3f7ae4939c25a8585eae5245",
+                "sha256:f5d33df775cb9094544f15e9b5788224488f506cf546c708980d2d44c2f93534"
+            ],
+            "index": "pypi",
+            "version": "==0.4.0"
         },
         "anyio": {
             "hashes": [
@@ -1273,6 +1289,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==1.7.0"
+        },
+        "portpicker": {
+            "hashes": [
+                "sha256:01113f51c3cc63290a44dd7ae6e3eb9f8fe1b8a1f9d7988a897944230c39cd52",
+                "sha256:c55683ad725f5c00a41bc7db0225223e8be024b1fa564d039ed3390e4fd48fb3"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==1.5.2"
         },
         "prometheus-client": {
             "hashes": [
