@@ -1,4 +1,6 @@
 import streamlit as st
+import base64
+import os
 
 # Set page layout and add CSS styling
 st.set_page_config(layout="wide")
@@ -35,20 +37,51 @@ st.write("This data science project analyzes the physical attributes, expected t
 with st.container():
     st.write("### Expected Threat Analysis")
     col1, col2 = st.columns([2, 3])
-    col2.image("https://media.giphy.com/media/YWUpVw86AtIbe/giphy.gif", use_column_width=True)
+    directory = os.getcwd()+'/libs/gifs/xthreat.gif'
+    file_ = open(directory, "rb")
+    contents = file_.read()
+    data_url = base64.b64encode(contents).decode("utf-8")
+    file_.close()
+
+    col2.markdown(
+        f'<img src="data:image/gif;base64,{data_url}" alt="cat gif"  width="900" height="500">',
+        unsafe_allow_html=True,
+    )
+    # col2.image(data_url, use_column_width=True)
+
     col1.write("This analysis involves calculating the change in the likelihood of scoring a goal based on various factors such as player positions, ball location, and time remaining in the game. By identifying the areas of the field with the highest expected threat, the team can focus their efforts on creating scoring opportunities in those areas.")
  
     st.write("### Passing Network Analysis")
     col1, col2 = st.columns([2, 3])
     col1.write("This analysis involves examining the playing patterns of the team in terms of their passes. By analyzing the frequency and success rate of passes between players, we can identify key players and playing strategies that contribute to the team's success. This analysis can also reveal areas for improvement and help the team refine their playing style.")
-    col2.image("https://icdn.sempremilan.com/wp-content/uploads/2020/10/c6d8fcf60c914a77682538e4b3e0de69-1.jpg", use_column_width=True)
+    directory = os.getcwd()+'/libs/gifs/passing_network.gif'
+    file_ = open(directory, "rb")
+    contents = file_.read()
+    data_url = base64.b64encode(contents).decode("utf-8")
+    file_.close()
+
+    col2.markdown(
+        f'<img src="data:image/gif;base64,{data_url}" alt="cat gif"  width="900" height="500">',
+        unsafe_allow_html=True,
+    )
+    # col2.image("https://icdn.sempremilan.com/wp-content/uploads/2020/10/c6d8fcf60c914a77682538e4b3e0de69-1.jpg", use_column_width=True)
 
     st.write("### Physical Attribute Analysis")
     col1, col2 = st.columns([2, 3])
     col1.write("")
-    col2.image("https://icdn.sempremilan.com/wp-content/uploads/2020/10/c6d8fcf60c914a77682538e4b3e0de69-1.jpg", use_column_width=True)
     col1.write("This analysis involves examining the physical attributes of each player throughout the match. By analyzing the distance covered, acceleration/deceleration ratio, and metabolic power output, we can gain insights into the players' fitness levels and overall performance.")
-  
+    
+    directory = os.getcwd()+'/libs/gifs/physical_attribute.gif'
+    file_ = open(directory, "rb")
+    contents = file_.read()
+    data_url = base64.b64encode(contents).decode("utf-8")
+    file_.close()
+
+    col2.markdown(
+        f'<img src="data:image/gif;base64,{data_url}" alt="cat gif"  width="900" height="500">',
+        unsafe_allow_html=True,
+    )
+
     st.markdown(
         """
         ### Conclusion
