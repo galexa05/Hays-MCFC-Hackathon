@@ -28,6 +28,7 @@ tqdm="4.59.0"
 altair="*"
 altair_viewer = "*"
 plotly = "*"
+streamlit-aggrid = "*"
 
 [dev-packages]
 

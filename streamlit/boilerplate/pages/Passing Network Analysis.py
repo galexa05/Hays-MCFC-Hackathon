@@ -223,7 +223,7 @@ with col_home_danger_pass:
         danger_passes_home_df['player_name'].unique()
     )
     home_player = danger_passes_home_df[danger_passes_home_df['player_name']==home_option]
-    plot_danger_passes(danger_passes=home_player,team_name=home_name,color_node='blue')
+    plot_danger_passes(danger_passes=home_player,team_name=home_option,color_node='blue')
     st.pyplot()
     
 with col_away_danger_pass:
@@ -241,5 +241,24 @@ with col_away_danger_pass:
         danger_passes_away_df['player_name'].unique()
     )
     away_player = danger_passes_away_df[danger_passes_away_df['player_name']==away_option]
-    plot_danger_passes(danger_passes=away_player,team_name=away_name,color_node='red')
+    plot_danger_passes(danger_passes=away_player,team_name=away_option,color_node='red')
     st.pyplot()
+
+# st.markdown("## Getting the ball back (5-second rule)")
+# col_home_ball_back,col_away_ball_back = st.columns(2)
+
+# with col_home_ball_back:
+#     #plot pitch
+#     danger_passes = get_danger_passes_team(df_match_events,home_name)
+#     pitch = Pitch(line_zorder=2,line_color='black')
+#     fig, ax = pitch.grid(grid_height=0.9, title_height=0.06, axis=False,
+#                         endnote_height=0.04, title_space=0, endnote_space=0)
+    
+#     # Create bins for the football pitch and draw the bins based on the number of located passes
+#     #get the 2D histogram
+#     bin_statistic = pitch.bin_statistic(danger_passes.x, danger_passes.y, statistic='count', bins=(3, 3), normalize=False)
+#     #normalize by number of games
+#     bin_statistic["statistic"] = bin_statistic["statistic"]
+#     pitch.heatmap(bin_statistic, cmap='Reds', edgecolor='grey', ax=ax['pitch'])
+#     st.pyplot()
+# # with col_away_ball_back:
