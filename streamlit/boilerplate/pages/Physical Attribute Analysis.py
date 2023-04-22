@@ -77,6 +77,8 @@ if(
    ):
 
     st.markdown("## Distance Covered by each team member")
+    st.markdown("""Knowing the distance covered by each team member can provide valuable insights into their work rate and fitness levels, 
+                helping the coaching staff to tailor training programs and make tactical decisions during matches.""")
 
     col_home_network,col_away_network = st.columns(2)
     with col_home_network:
@@ -125,11 +127,13 @@ if(
                 path_effects.Normal()]
 
     
-
+    st.markdown("## Heatmap for whole team and individual player")
+    st.markdown(""" A heatmap for the whole team or where each player moves can help identify patterns in their positioning and movement, 
+    allowing the coaching staff to fine-tune tactics and improve team coordination.""")
     col_home_network,col_away_network = st.columns(2)
 
     with col_home_network:
-        st.markdown("## Heatmap for whole team")
+        st.markdown(f"### {home_name}")
         # draw
         fig, ax = pitch.draw(figsize=(6.6, 4.125))
         fig.set_facecolor('#22312b')
@@ -144,7 +148,7 @@ if(
         st.pyplot()
 
              # Heatmap for specific team member
-        st.markdown("## Heatmap for specific team member")
+        st.markdown(f"### Heatmap for specific team member for {home_name}")
 
         player_selector = st.selectbox(
         "Select a Player",
@@ -164,27 +168,12 @@ if(
         ticks = plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'), color='#efefef')
         st.pyplot()
 
-        st.markdown("### Heatmap to larger bins")
-        pitch_v = VerticalPitch(pitch_type='statsbomb', line_zorder=2, pitch_color='#f4edf0')
-        fig, ax = pitch_v.draw(figsize=(4.125, 6))
-        fig.set_facecolor('#f4edf0')
-        bin_x = np.linspace(pitch_v.dim.left, pitch_v.dim.right, num=7)
-        bin_y = np.sort(np.array([pitch_v.dim.bottom, pitch_v.dim.six_yard_bottom,
-                                pitch_v.dim.six_yard_top, pitch_v.dim.top]))
-        bin_statistic = pitch_v.bin_statistic(df_pressure_home.x, df_pressure_home.y, statistic='count',
-                                            bins=(bin_x, bin_y), normalize=True)
-        pitch_v.heatmap(bin_statistic, ax=ax, cmap='Reds', edgecolor='#f9f9f9')
-        labels2 = pitch_v.label_heatmap(bin_statistic, color='#f4edf0', fontsize=18,
-                                    ax=ax, ha='center', va='center',
-                                    str_format='{:.0%}', path_effects=path_eff)
-
-        st.pyplot()
         
 
 
 
     with col_away_network:
-        st.markdown("## Heatmap for whole team")
+        st.markdown(f"### {away_name}")
         # draw
         fig, ax = pitch.draw(figsize=(6.6, 4.125))
         fig.set_facecolor('#22312b')
@@ -199,7 +188,7 @@ if(
         st.pyplot()
 
              # Heatmap for specific team member
-        st.markdown("## Heatmap for specific team member")
+        st.markdown(f"### Heatmap for specific team member for {away_name}")
 
         player_selector = st.selectbox(
         "Select a Player",
@@ -219,7 +208,37 @@ if(
         ticks = plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'), color='#efefef')
         st.pyplot()
 
-        st.markdown("### Heatmap to larger bins")
+
+
+
+
+
+    st.markdown("## Heatmap for all pressure events")
+    st.markdown(""" A heatmap showing where the team pressured the opposing team more can help identify areas of strength and weakness in the team's defensive strategy, 
+    allowing the coaching staff to make adjustments to better control the game.""")
+    col_home_network,col_away_network = st.columns(2)
+
+    with col_home_network:       
+        st.markdown(f"### {home_name}") 
+        pitch_v = VerticalPitch(pitch_type='statsbomb', line_zorder=2, pitch_color='#f4edf0')
+        fig, ax = pitch_v.draw(figsize=(4.125, 6))
+        fig.set_facecolor('#f4edf0')
+        bin_x = np.linspace(pitch_v.dim.left, pitch_v.dim.right, num=7)
+        bin_y = np.sort(np.array([pitch_v.dim.bottom, pitch_v.dim.six_yard_bottom,
+                                pitch_v.dim.six_yard_top, pitch_v.dim.top]))
+        bin_statistic = pitch_v.bin_statistic(df_pressure_home.x, df_pressure_home.y, statistic='count',
+                                            bins=(bin_x, bin_y), normalize=True)
+        pitch_v.heatmap(bin_statistic, ax=ax, cmap='Reds', edgecolor='#f9f9f9')
+        labels2 = pitch_v.label_heatmap(bin_statistic, color='#f4edf0', fontsize=18,
+                                    ax=ax, ha='center', va='center',
+                                    str_format='{:.0%}', path_effects=path_eff)
+
+        st.pyplot()
+
+
+
+    with col_away_network:   
+        st.markdown(f"### {away_name}")
         pitch_v = VerticalPitch(pitch_type='statsbomb', line_zorder=2, pitch_color='#f4edf0')
         fig, ax = pitch_v.draw(figsize=(4.125, 6))
         fig.set_facecolor('#f4edf0')
@@ -235,22 +254,17 @@ if(
 
         st.pyplot()
 
-
-
-
-
-
-
-
-
-
-
     # # Acc/Decc ratio
     st.markdown("## Acceleration/Deceleration ratio")
+    st.markdown("""
+    Understanding the acceleration/deceleration ratio of each player can help identify those who are particularly explosive and quick off the mark, 
+    which could be beneficial in certain positions or game situations.
+    """)
         
 
     col_home_network,col_away_network = st.columns(2)
     with col_home_network:
+        st.markdown(f"### {home_name}")
         with st.spinner('Wait for it...'):
             home_summary = acc_1(tracking_home, home_summary, players_name_and_pos_conc_home)
             fig, ax = plt.subplots()
@@ -266,6 +280,7 @@ if(
             st.pyplot()
     
     with col_away_network:
+        st.markdown(f"### {away_name}")
         with st.spinner('Wait for it...'):
             away_summary = acc_1(tracking_away, away_summary, players_name_and_pos_conc_away)
             fig, ax = plt.subplots()
@@ -284,11 +299,18 @@ if(
 
     # Metabolic
     st.markdown("## Metabolic power output")
+    st.markdown("""
+    Measuring the metabolic power output of players can provide valuable information about their energy expenditure and intensity levels, 
+    helping the coaching staff to optimise training and match preparation strategies.
+    """)
+
+
     col_home_network,col_away_network = st.columns(2)
     with col_home_network:
+        st.markdown(f"### {home_name}")
         player_selector_metabolic_home = st.selectbox(
         "Select a Player",
-        list(players_name_and_pos_conc_home.values())
+        list(players_name_and_pos_conc_home.values())[::-1]
         )
         player_selector_metabolic_mapped = list(filter(lambda x: players_name_and_pos_conc_home[x] == player_selector_metabolic_home, players_name_and_pos_conc_home))[0]
         player_selector_metabolic_mapped_mod = f"Home_{player_selector_metabolic_mapped}"
@@ -309,14 +331,21 @@ if(
             signal = np.array(test_mp[second_half_idx_home:len(test_mp)]).reshape((len(test_mp[second_half_idx_home:len(test_mp)]),1))
             algo = rpt.Binseg(model="l2").fit(signal)  ##potentially finding spot where substitution should happen
             result = algo.predict(n_bkps=1)  # big_seg
-            rpt.show.display(signal, result, figsize=(10, 6))
-            plt.title(f"Metabolic Power Output  - Binary segmentation prediction for {player_selector_metabolic_home}")
-            plt.ylabel("Metabolic Power")
-            plt.xlabel("Frame")
+            result[0] = np.round(result[0]*0.04/60,2)+int(second_half_idx_home * 0.04 / 60) 
+            result[1] = np.round(result[1]*0.04/60,2)+int(second_half_idx_home * 0.04 / 60) 
+            diff = int(second_half_idx_home * 0.04 / 60) - 45
+            test_mp.index = np.array((test_mp.index)*0.04/60) - diff
+
+            ax.plot(test_mp[int(second_half_idx_home * 0.04 / 60):])
+            ax.axvspan(result[0]-diff,result[1]-diff, alpha=0.5, color='red')
+            ax.set_title('Metabolic Power Output')
+            ax.set_ylabel("Metabolic Power")
+            ax.set_xlabel("Time [minutes]")
             st.pyplot()
 
 
     with col_away_network:
+        st.markdown(f"### {away_name}")
         player_selector_metabolic_away = st.selectbox(
         "Select a Player",
         list(players_name_and_pos_conc_away.values())
@@ -340,10 +369,16 @@ if(
             signal = np.array(test_mp[second_half_idx_away:len(test_mp)]).reshape((len(test_mp[second_half_idx_away:len(test_mp)]),1))
             algo = rpt.Binseg(model="l2").fit(signal)  ##potentially finding spot where substitution should happen
             result = algo.predict(n_bkps=1)  # big_seg
-            rpt.show.display(signal, result, figsize=(10, 6))
-            plt.title(f"Metabolic Power Output  - Binary segmentation prediction for {player_selector_metabolic_away}")
-            plt.ylabel("Metabolic Power")
-            plt.xlabel("Frame")
+            result[0] = np.round(result[0]*0.04/60,2)+int(second_half_idx_away * 0.04 / 60) 
+            result[1] = np.round(result[1]*0.04/60,2)+int(second_half_idx_away * 0.04 / 60) 
+            diff = int(second_half_idx_away * 0.04 / 60) - 45
+            test_mp.index = np.array((test_mp.index)*0.04/60) - diff
+
+            ax.plot(test_mp[int(second_half_idx_away * 0.04 / 60):])
+            ax.axvspan(result[0]-diff,result[1]-diff, alpha=0.5, color='red')
+            ax.set_title('Metabolic Power Output')
+            ax.set_ylabel("Metabolic Power")
+            ax.set_xlabel("Time [minutes]")
             st.pyplot()
 
    

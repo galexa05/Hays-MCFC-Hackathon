@@ -10,6 +10,10 @@ import networkx as nx
 import glob
 import os
 import sys
+print("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+
+sys.path.append(os.path.join(os.path.dirname(__file__),"../../../../" ,"libs"))
+
 from visualization.passing_network import draw_pitch, draw_pass_map
 import warnings
 warnings.filterwarnings("ignore")

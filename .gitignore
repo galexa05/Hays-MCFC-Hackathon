@@ -1,6 +1,7 @@
 *.log
 .DS_Store
 data/
+libs/gifs/gifs_videos/
 final_data/
 .Rhistory
 streamlit/rascore/

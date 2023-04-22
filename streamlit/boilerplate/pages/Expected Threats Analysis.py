@@ -83,7 +83,19 @@ shot_patterns_df = prepare_coordinates(shot_patterns_df)
 
 
 st.markdown(f'## {home_name}')
-st.markdown('### Possession chains leading to a shot')
+st.markdown(
+    f"""
+    ### Possession chains leading to a shot
+    - Below is a list of all shots made by **{home_name}**, which indicates: 
+        - Corresponding Chain ID 
+        - Minute in which the chance was made
+        - Player who made the shot
+        - Halftime period 
+        - Number of passes that were made before the shot
+
+    - By selecting a specific record from the list, you can visualize the entire activity of the corresponding chain leading up to the shot. This provides a comprehensive view of the buildup to the chance, allowing for a more detailed analysis of the team's performance.
+    """
+)
 col_df_home_df,col_df_home_plot = st.columns(2)
 with col_df_home_df:
     # Present a dataframe with the possession chains that ended to a shot
@@ -92,7 +104,8 @@ with col_df_home_df:
 
 with col_df_home_plot:
     # Plot chain of event before shot
-    response = get_details_from_chain(shot_patterns_df,grid_response_home)
+    response = get_details_from_chain(shot_patterns_df,grid_response_home,home_name)
+    # import pdb;pdb.set_trace()
     shot = response['shot']
     passes = response['passes']
     not_pass = response['not_pass']
@@ -144,7 +157,18 @@ with col_df_home_plot:
     # st.plotly_chart(fig, width="100%")
 
 
-st.markdown('### xT(Expected Threat) scores per player')
+st.markdown(
+    f"""
+    ### xT(Expected Threat) score per player
+    - Below is a list of players from **{home_name}** that summarizes their performance based on their xThreat score.
+    - The list displays each player's:
+        - Total xThreat score for the match
+        - Average xThreat score based on their created attempts
+        - Total attempts at creating chances
+        - Rank based on their total xThreat score
+    - By selecting a specific record from the list, you can visualize the entire activity of the corresponding chain leading up to the chance creation.
+    - This allows for a more detailed analysis of the player's performance and the team's overall strategy.    """
+)
 col_summary_df_home,col_summary_plot_home = st.columns(2)
 with col_summary_df_home:
     df_coordinates,var = prepare_data_modeling_xgb(df_isolated_chains,home_name,home_possession_df)
@@ -207,6 +231,7 @@ with col_summary_plot_home:
     not_pass = chain.loc[chain["type_name"] != "Pass"].iloc[:-1]
     #shot is the last event of the chain (or should be)
     shot = chain.iloc[-1]
+    # import pdb;pdb.set_trace()
 
     #plot
     pitch = Pitch(line_color='black',pitch_type='custom', pitch_length=120, pitch_width=80, line_zorder = 2)
@@ -230,7 +255,7 @@ with col_summary_plot_home:
                 shot.x1, shot.y1, width=line_width, color = "red", ax=ax['pitch'], zorder =  3)
     #other passes like arrows
     pitch.lines(not_pass.x0, not_pass.y0, not_pass.x1, not_pass.y1, color = "grey", lw = 1.5, ls = 'dotted', ax=ax['pitch'])
-    ax['title'].text(0.5, 0.5, f'Passes leading to a shot (Chain ID: {option_chain})', ha='center', va='center', fontsize=30)
+    ax['title'].text(0.5, 0.5, f'Attempts leading to a shot (Chain ID: {option_chain})', ha='center', va='center', fontsize=20)
     st.write('\n')
     st.write('\n') 
     st.write('\n')    
@@ -239,12 +264,26 @@ with col_summary_plot_home:
 
 
 st.markdown(f'## {away_name}')
+st.markdown(
+f"""
+### Possession chains leading to a shot
+- Below is a list of all shots made by **{away_name}**, which indicates: 
+    - Corresponding Chain ID 
+    - Minute in which the chance was made
+    - Player who made the shot
+    - Halftime period 
+    - Number of passes that were made before the shot
+
+- By selecting a specific record from the list, you can visualize the entire activity of the corresponding chain leading up to the shot. This provides a comprehensive view of the buildup to the chance, allowing for a more detailed analysis of the team's performance.
+"""
+)
+
 col_df_away_df,col_df_away_plot = st.columns(2)
 with col_df_away_df:
     away_possession_df = get_team_patterns(shot_patterns_df,away_name)
     away_chain_table,grid_response_away = structure_chains_table(away_possession_df)
 with col_df_away_plot:
-    response = get_details_from_chain(shot_patterns_df,grid_response_away)
+    response = get_details_from_chain(shot_patterns_df,grid_response_away,away_name)
     shot = response['shot']
     passes = response['passes']
     not_pass = response['not_pass']
@@ -254,7 +293,18 @@ with col_df_away_plot:
     st.write('\n')
     st.pyplot()
 
-st.markdown('### xT(Expected Threat) scores per player')
+st.markdown(
+    f"""
+    ### xT(Expected Threat) score per player
+    - Below is a list of players from **{away_name}** that summarizes their performance based on their xThreat score.
+    - The list displays each player's:
+        - Total xThreat score for the match
+        - Average xThreat score based on their created attempts
+        - Total attempts at creating chances
+        - Rank based on their total xThreat score
+    - By selecting a specific record from the list, you can visualize the entire activity of the corresponding chain leading up to the chance creation.
+    - This allows for a more detailed analysis of the player's performance and the team's overall strategy.    """
+)
 col_summary_df_away,col_summary_plot_away = st.columns(2)
 with col_summary_df_away:
     df_coordinates_away,var = prepare_data_modeling_xgb(df_isolated_chains,away_name,away_possession_df)
@@ -334,7 +384,7 @@ with col_summary_plot_away:
                 shot.x1, shot.y1, width=line_width, color = "red", ax=ax['pitch'], zorder =  3)
     #other passes like arrows
     pitch.lines(not_pass.x0, not_pass.y0, not_pass.x1, not_pass.y1, color = "grey", lw = 1.5, ls = 'dotted', ax=ax['pitch'])
-    ax['title'].text(0.5, 0.5, f'Passes leading to a shot (Chain ID {option_chain})', ha='center', va='center', fontsize=30)
+    ax['title'].text(0.5, 0.5, f'Attempts leading to a shot (Chain ID: {option_chain})', ha='center', va='center', fontsize=20)
     st.write('\n')
     st.write('\n') 
     st.write('\n')    
