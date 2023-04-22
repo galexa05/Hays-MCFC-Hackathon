@@ -14,7 +14,7 @@ import pandas as pd
 import numpy as np
 import os
 import sys
-from libs.utils import read_json
+from utils import read_json
 
 
 def get_config(config_team):

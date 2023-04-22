@@ -30,6 +30,9 @@ altair_viewer = "*"
 plotly = "*"
 streamlit-aggrid = "*"
 ruptures = "*"
+scikit-learn = "*"
+xgboost = "*"
+networkx = "*"
 
 [dev-packages]
 
