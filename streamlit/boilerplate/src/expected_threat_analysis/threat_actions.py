@@ -221,13 +221,13 @@ def prepare_coordinates_not_pass(not_pass_patterns_df):
     not_pass_patterns_df['end_shot'] = 0 
     return not_pass_patterns_df
 
-def get_details_from_chain(df,response):
+def get_details_from_chain(df,response,team_name):
     try:
         chain_id = response['selected_rows'][0]['chain ID']
         chain = df.loc[df["possession_chain"] == chain_id]
     except:
-        chain_id = df["possession_chain"].unique()[0]
-        chain = df.loc[df["possession_chain"] == df["possession_chain"].unique()[0]]
+        chain_id = df[df['team_name']==team_name]["possession_chain"].unique()[0]
+        chain = df.loc[df["possession_chain"] == chain_id]
 
     passes = chain.loc[chain["type_name"].isin(["Pass"])]
     #get events different than pass
@@ -286,7 +286,7 @@ def plot_passes_before_shot(shot,passes,not_pass,chain_id):
                 shot.x1, shot.y1, color = "red", ax=ax['pitch'], zorder =  3)
     #other passes like arrows
     pitch.lines(not_pass.x0, not_pass.y0, not_pass.x1, not_pass.y1, color = "grey", lw = 1.5, ls = 'dotted', ax=ax['pitch'])
-    ax['title'].text(0.5, 0.5, f'Passes leading to a shot (Chain ID: {chain_id})', ha='center', va='center', fontsize=30)
+    ax['title'].text(0.5, 0.5, f'Passes leading to a shot (Chain ID: {chain_id}) from {shot.player_name.split(" ")[-1]}', ha='center', va='center', fontsize=25)
     return pitch,ax
 
 
@@ -322,7 +322,7 @@ def _grid_builder(df_table,key=None):
         enable_enterprise_modules=True,
         # height=350, 
         width='100%',
-        reload_data=True
+        # reload_data=True
     )
     return grid_response
 
