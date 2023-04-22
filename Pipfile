@@ -29,6 +29,7 @@ altair="*"
 altair_viewer = "*"
 plotly = "*"
 streamlit-aggrid = "*"
+ruptures = "*"
 
 [dev-packages]
 
