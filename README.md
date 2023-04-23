@@ -6,7 +6,7 @@
 1. Clone the repository
 2. Open up a terminal and navigate to the directory `Hays-MCFC-Hackathon`
 3. Type `pipenv install`
-4. Type `pipenv run streamlit run .\streamlit\boilerplate\Homepage.py`
+4. Type `pipenv run streamlit run .\streamlit\boilerplate\Homepage.py` (Windows) or `pipenv run streamlit run ./streamlit/boilerplate/Homepage.py` (MacOS/Linux)
 
 ## About
 
