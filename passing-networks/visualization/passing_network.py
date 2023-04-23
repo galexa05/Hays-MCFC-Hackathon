@@ -15,7 +15,7 @@ from matplotlib import cm
 import pandas as pd
 import numpy as np
 
-from utils import read_json
+from utils_ import read_json
 
 
 config = read_json("visualization/plot_config.json")
@@ -208,9 +208,9 @@ def draw_pass_map(ax, player_position,
                     fontsize=config["font_size"], color=config["font_color"], weight='bold',
                     path_effects=[pe.withStroke(linewidth=2, foreground=background_color)])
 
-    # Step 3: Extra information shown on the plot
-    ax.annotate("@SergioMinuto90", xy=(0.99*width, 0.02*height),
-                ha="right", va="bottom", zorder=7, fontsize=10, color=config["lines_color"])
+    # # Step 3: Extra information shown on the plot
+    # ax.annotate("@SergioMinuto90", xy=(0.99*width, 0.02*height),
+    #             ha="right", va="bottom", zorder=7, fontsize=10, color=config["lines_color"])
 
     if legend:
         ax.annotate(legend, xy=(0.01*width, 0.02*height),
