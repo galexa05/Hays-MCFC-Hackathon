@@ -17,3 +17,6 @@ Our primary objective was to provide the club with valuable insights into the te
 3. Player physical attributes. 
 
 Our aim was to assist the coaching staff in gaining a better understanding of the team's strengths and weaknesses and identify areas for improvement. All thesewere also  implemented in a **Web Application** for easy access and interpretation by anyone. We are confident that our findings will provide the club with a competitive edge and help them continue to achieve success on the field. We appreciate your attendance today and look forward to presenting our results.
+
+---
+Link to watch the video presentation: https://www.youtube.com/watch?v=3EDzLQrLafk
