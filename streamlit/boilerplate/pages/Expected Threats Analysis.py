@@ -349,7 +349,7 @@ with col_summary_plot_away:
     if type_chain_away!='':
         option_chain = int(type_chain_away)
     else:
-        option_chain = selected_chain
+        option_chain = selected_chain_away
     chain = df_coordinates.loc[(df_coordinates["possession_chain"] == option_chain)]
     #get passes
     passes_in = passes_away.loc[ 
